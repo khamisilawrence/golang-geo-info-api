@@ -7,6 +7,10 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+
+	_ "geo-info-api/docs" // Import the generated Swagger docs
+
+	echoSwagger "github.com/swaggo/echo-swagger"
 )
 
 func main() {
@@ -22,6 +26,9 @@ func main() {
 
 	// Apply rate limiting (20 requests per second per client)
 	e.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(20)))
+
+	// Add Swagger endpoint
+	e.GET("/swagger/*", echoSwagger.WrapHandler)
 
 	// Define Routes
 	defineRoutes(e)
