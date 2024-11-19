@@ -34,7 +34,7 @@ func main() {
 	defineRoutes(e)
 
 	// Start the server
-	e.Logger.Fatal(e.Start(":8080"))
+	e.Logger.Fatal(e.Start("0.0.0.0:8080"))
 }
 
 func defineRoutes(e *echo.Echo) {
