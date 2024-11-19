@@ -7,7 +7,18 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-// GetCountryInfo handles the /info route
+// GetCountryInfo godoc
+// @Summary Retrieve country information
+// @Description Get detailed geospatial and demographic information about a country.
+// @Tags country
+// @Accept  json
+// @Produce  json
+// @Param   country query string true "Country name"
+// @Success 200 {object} map[string]interface{}
+// @Failure 400 {object} utils.ErrorResponse
+// @Failure 404 {object} utils.ErrorResponse
+// @Failure 500 {object} utils.ErrorResponse
+// @Router /info [get]
 func GetCountryInfo(c echo.Context) error {
 	// Extract 'country' from query parameter
 	country := c.QueryParam("country")
