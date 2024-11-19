@@ -4,6 +4,7 @@ import (
 	"geo-info-api/handlers"
 	"geo-info-api/utils"
 	"net/http"
+	"os"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -33,8 +34,14 @@ func main() {
 	// Define Routes
 	defineRoutes(e)
 
+	// Get the PORT from the environment
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080" // Default to 8080 if PORT is not set
+	}
+
 	// Start the server
-	e.Logger.Fatal(e.Start("0.0.0.0:8080"))
+	e.Logger.Fatal(e.Start("0.0.0.0:" + port))
 }
 
 func defineRoutes(e *echo.Echo) {
