@@ -20,6 +20,9 @@ func main() {
 	e.Use(middleware.Logger())  // Logs HTTP requests
 	e.Use(middleware.Recover()) // Recovers from panics and logs them
 
+	// Apply rate limiting (20 requests per second per client)
+	e.Use(middleware.RateLimiter(middleware.NewRateLimiterMemoryStore(20)))
+
 	// Define Routes
 	defineRoutes(e)
 
