@@ -9,6 +9,12 @@ import (
 
 // FetchCountryData calls the Restcountries API
 func FetchCountryData(country string) (map[string]interface{}, error) {
+	// Check cache first
+	if cachedData, found := Cache.Get(country); found {
+		return cachedData.(map[string]interface{}), nil
+	}
+
+	// Fetch from external API if not in cache
 	url := fmt.Sprintf("https://restcountries.com/v3.1/name/%s", country)
 
 	// Send HTTP GET request
@@ -35,6 +41,7 @@ func FetchCountryData(country string) (map[string]interface{}, error) {
 
 	// Return the first match
 	if len(data) > 0 {
+		Cache.Set(country, data[0], 1) // Cache the first result
 		return data[0], nil
 	}
 
