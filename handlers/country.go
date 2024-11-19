@@ -37,5 +37,6 @@ func GetCountryInfo(c echo.Context) error {
 		"flag":          countryData["flags"].(map[string]interface{})["png"],
 	}
 
-	return c.JSON(http.StatusOK, response)
+	return utils.HandleSuccess(c, response)
+
 }
