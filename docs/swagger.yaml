@@ -1,0 +1,44 @@
+definitions:
+  utils.ErrorResponse:
+    properties:
+      message:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /info:
+    get:
+      consumes:
+      - application/json
+      description: Get detailed geospatial and demographic information about a country.
+      parameters:
+      - description: Country name
+        in: query
+        name: country
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/utils.ErrorResponse'
+      summary: Retrieve country information
+      tags:
+      - country
+swagger: "2.0"
