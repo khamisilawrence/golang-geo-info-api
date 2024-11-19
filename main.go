@@ -2,12 +2,17 @@ package main
 
 import (
 	"geo-info-api/handlers"
+	"geo-info-api/utils"
+	"net/http"
+
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
-	"net/http"
 )
 
 func main() {
+	// Initialize the cache
+	utils.InitCache()
+
 	// Initialize Echo instance
 	e := echo.New()
 
