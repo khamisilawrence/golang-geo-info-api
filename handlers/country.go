@@ -12,17 +12,17 @@ func GetCountryInfo(c echo.Context) error {
 	// Extract 'country' from query parameter
 	country := c.QueryParam("country")
 	if country == "" {
-		return c.JSON(http.StatusBadRequest, map[string]string{
-			"error": "Country query parameter is required",
-		})
+		return utils.HandleError(c, http.StatusBadRequest, "Country query parameter is required")
 	}
 
 	// Fetch country data from Restcountries API
 	countryData, err := utils.FetchCountryData(country)
 	if err != nil {
-		return c.JSON(http.StatusInternalServerError, map[string]string{
-			"error": err.Error(),
-		})
+		return utils.HandleError(c, http.StatusInternalServerError, err.Error())
+	}
+
+	if countryData == nil {
+		return utils.HandleError(c, http.StatusNotFound, "Country not found")
 	}
 
 	// Build response
