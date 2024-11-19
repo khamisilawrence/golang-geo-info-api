@@ -1,0 +1,9 @@
+services:
+  - name: geo-info-api
+    type: web
+    env: docker
+    plan: free
+    dockerfilePath: Dockerfile
+    envVars:
+      - key: PORT
+        value: 8080
