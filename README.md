@@ -65,8 +65,8 @@ Retrieve detailed information about a country.
 1. **Clone the repository**:
 
     ```bash
-    git clone <repository_url>
-    cd geo-info-api
+    git clone <https://github.com/khamisilawrence/golang-geo-info-api.git>
+    cd golang-geo-info-api
     ```
 
 2. **Install dependencies**:
